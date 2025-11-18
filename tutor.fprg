@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="tutor"/>
+        <attribute name="authors" value="TUF"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-11-18 09:09:07 PM"/>
+        <attribute name="created" value="VFVGO0xBUFRPUC1USjFBR0hRUzsyMDIzLTA5LTI4OzA4LjI1LjI2IFBNOzI1OTY="/>
+        <attribute name="edited" value="VFVGO0xBUFRPUC1USjFBR0hRUzsyMDIzLTExLTAyOzA5LjM2LjI2IEFNOzc7MjY4Mw=="/>
+        <attribute name="edited" value="QXN1cztMQVBUT1AtOE42VExWUlE7MjAyNS0xMS0xODswOTowOTowNyBQTTsyOzI5MTY="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="kodematakuliah, matkul, dosenpengampu, formatnamatugas, status, harihinggawaktupengumpulan, deskripsitugas" type="String" array="True" size="10"/>
+            <declare name="tingkatkesulitan, harideadline" type="Integer" array="True" size="10"/>
+            <declare name="y, z" type="Integer" array="False" size=""/>
+            <declare name="prioritas" type="Real" array="True" size="10"/>
+            <assign variable="z" expression="0"/>
+            <for variable="z" start="0" end="9" direction="inc" step="1">
+                <input variable="deskripsitugas[z]"/>
+                <if expression="deskripsitugas[z]=&quot;---&quot;">
+                    <then>
+                        <assign variable="Z" expression="10"/>
+                    </then>
+                    <else>
+                        <input variable="kodematakuliah[z]"/>
+                        <input variable="matkul[z]"/>
+                        <input variable="dosenpengampu[z]"/>
+                        <input variable="harihinggawaktupengumpulan[z]"/>
+                        <input variable="formatnamatugas[z]"/>
+                        <input variable="tingkatkesulitan[z]"/>
+                        <input variable="harideadline[z]"/>
+                        <input variable="status[z]"/>
+                        <assign variable="prioritas[z]" expression="tingkatkesulitan[z]*(1.0/harideadline[z])"/>
+                        <if expression="prioritas[z]&gt;3">
+                            <then>
+                                <assign variable="status[z]" expression="&quot;Penting!Anda harus mengerjakan tugas ini segera.&quot;"/>
+                            </then>
+                            <else>
+                                <if expression="prioritas[z]&gt;=1.5&amp;&amp;prioritas[z]&lt;3">
+                                    <then>
+                                        <assign variable="status[z]" expression="&quot;Tugas ini memiliki prioritas menengah.&quot;"/>
+                                    </then>
+                                    <else>
+                                        <if expression="prioritas[z]&lt;1.5">
+                                            <then>
+                                                <assign variable="status[z]" expression="&quot;Tugas ini relatif ringan,namun jangan tunda terlalu lama.&quot;"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                        <assign variable="y" expression="z"/>
+                    </else>
+                </if>
+            </for>
+            <for variable="z" start="y" end="0" direction="dec" step="1">
+                <output expression="&quot; prioritas:&quot; &amp;ToFixed(prioritas[z],2)" newline="True"/>
+                <output expression="kodematakuliah[z]&amp;&quot;|&quot;&amp;matkul[z]&amp;&quot;|&quot;&amp;dosenpengampu[z]&amp;&quot;|&quot;&amp;harihinggawaktupengumpulan[z]&amp;&quot;|&quot;&amp;formatnamatugas[z]&amp;&quot;|&quot;&amp;status[z]" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
